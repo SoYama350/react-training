@@ -6,22 +6,22 @@ const initialGoals = [{
 },
 {
   id: 4464,
-  name: "dasda",
+  name: "hit the gym",
   check: false,
 },
 {
   id: 565555,
-  name: "sdasdas",
+  name: "read a book ",
   check: true,
 },
 {
   id: 59952,
-  name: "caasdasdtch",
+  name: "quit manga",
   check: true,
 },
 {
   id: 6511,
-  name: "asdasdac",
+  name: "analize your week",
   check: false,
 }];
 export default function App() {
@@ -33,11 +33,11 @@ export default function App() {
   }
 
 
-
   return (
     <div className="App">
       <MainBody inputGoal={inputGoal} />
       <FormAddGoal onAddGoal={handleAddGoal} />
+      <TableTest goal={inputGoal} />
     </div>
   );
 }
@@ -56,17 +56,7 @@ function MainBody({inputGoal}) {
 
   return (
     <div>
-      <ul className='days'>
-        <li>sat</li>
-        <li>sun</li>
-        <li>mon</li>
-        <li>tus</li>
-        <li>wed</li>
-        <li>thu</li>
-        <li>fri</li>
-      </ul>
       <GoalList goals={inputGoal} />
-      
     </div>
   )
 }
@@ -75,12 +65,20 @@ function MainBody({inputGoal}) {
 function Task({ goal }) {
   const [check, setCheck] = useState(false);
 
+  function handleCheckClick() {
+    setCheck(!check);
+  }
+
+
+  function handleCheckBox(e) {
+    setCheck(e.target.checked);
+  }
   return (
     <li>
     <div>
-      <h2>{goal}</h2><input type='checkbox' value={check} onChange={(e) => setCheck(e.target.value)}/>
+      <h2>{goal}</h2><input type='checkbox' checked={check} onChange={handleCheckBox} />
       <p>have you done this today ? </p>
-      <button onClick={() => setCheck(true)}>close</button>
+      <button onClick={handleCheckClick}>{check ? "close" : "done"}</button>
 
   
     </div>
@@ -114,4 +112,71 @@ function FormAddGoal({ onAddGoal }) {
   )
 }
 
+function AddedTh({goal}) {
+  return (
+    <>
+      {goal.map((go) => 
+        <th key={go.id} scope="col"> {go.name} </th>)}
+    </>
+  )  
+}
+function TableTest({goal}) {
+  return (
+<table>
+  <thead>
+    <tr className='days'>
+      <th></th>
+      <AddedTh goal={goal} />
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">sat</th>
+      <td>Data 1A</td>
+      <td>Data 1B</td>
+      <td>Data 1C</td>
+    </tr>
+    <tr>
+      <th scope="row">sun</th>
+      <td>Data 2A</td>
+      <td>Data 2B</td>
+      <td>Data 2C</td>
+    </tr>
+    <tr>
+      <th scope="row">mon</th>
+      <td>Data 3A</td>
+      <td>Data 3B</td>
+      <td>Data 3C</td>
+    </tr>
+    <tr>
+      <th scope="row">tus</th>
+      <td>Data 1A</td>
+      <td>Data 1B</td>
+      <td>Data 1C</td>
+    </tr>
+    <tr>
+      <th scope="row">wed</th>
+      <td>Data 2A</td>
+      <td>Data 2B</td>
+      <td>Data 2C</td>
+    </tr>
+    <tr>
+      <th scope="row">thu</th>
+      <td>Data 3A</td>
+      <td>Data 3B</td>
+      <td>Data 3C</td>
+    </tr>
+    <tr>
+      <th scope="row">fri</th>
+      <td>Data 3A</td>
+      <td>Data 3B</td>
+      <td>Data 3C</td>
+    </tr>
+  </tbody>
+</table>
+  )
+}
 
+
+
+//next look into how to add the <td> for every day to tasks and how to change the checkbox and table style 
