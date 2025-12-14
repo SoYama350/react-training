@@ -8,6 +8,8 @@ const styleContainer = {
 
 const starStyleContainer = {
     display: "flex",
+    alignItem: "center",
+
 };
 
 
@@ -66,7 +68,6 @@ function Star({ onRate, full, onHoverIn, onHoverOut , size , color }) {
 
     const starStyle = {
     width: `${size}px`, 
-    height: "48px",
     display: "block",
     cursor: "pointer",
     };
